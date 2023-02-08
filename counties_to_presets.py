@@ -45,25 +45,29 @@ borough_pops = {2062: 4865, 2064: 2065}
 dem_vals = []
 gop_vals = []
 indy_vals = []
-for borough in list(borough_pops.keys()):
-    borough_data = county_data_frame.loc[county_data_frame["FIPS"] == borough]
-    gop_vals.append(borough_data["GOP %"].to_list()[0])
-    dem_vals.append(borough_data["Dem %"].to_list()[0])
-    indy_vals.append(borough_data["Indy %"].to_list()[0])
-    county_data_frame = county_data_frame[county_data_frame["FIPS"] != borough]
-dem_average = np.average(dem_vals, weights=list(borough_pops.values()))
-gop_average = np.average(gop_vals, weights=list(borough_pops.values()))
-indy_average = np.average(indy_vals, weights=list(borough_pops.values()))
-valdez_cordova = {"FIPS": 0, "County Name": "Valdez Cordova",
-                  "TPP County Name": "Valdez Cordova Borough",
-                  "Population": 4865+2065, "State": "Alaska",
-                  "State code": "AK", "Dem %": dem_average,
-                  "GOP %": gop_average, "Indy %": indy_average}
-county_data_frame = county_data_frame.to_dict(orient="records")
-county_data_frame.append(valdez_cordova)
-for county in county_data_frame:
-    county["County Index"] = county["TPP County Name"] + (county["State code"].lower())
-county_data_frame = pd.DataFrame(county_data_frame)
+try:
+    for borough in list(borough_pops.keys()):
+        borough_data = county_data_frame.loc[county_data_frame["FIPS"] == borough]
+        gop_vals.append(borough_data["GOP %"].to_list()[0])
+        dem_vals.append(borough_data["Dem %"].to_list()[0])
+        indy_vals.append(borough_data["Indy %"].to_list()[0])
+        county_data_frame = county_data_frame[county_data_frame["FIPS"] != borough]
+except Exception:
+    pass
+else:
+    dem_average = np.average(dem_vals, weights=list(borough_pops.values()))
+    gop_average = np.average(gop_vals, weights=list(borough_pops.values()))
+    indy_average = np.average(indy_vals, weights=list(borough_pops.values()))
+    valdez_cordova = {"FIPS": 0, "County Name": "Valdez Cordova",
+                      "TPP County Name": "Valdez Cordova Borough",
+                      "Population": 4865+2065, "State": "Alaska",
+                      "State code": "AK", "Dem %": dem_average,
+                      "GOP %": gop_average, "Indy %": indy_average}
+    county_data_frame = county_data_frame.to_dict(orient="records")
+    county_data_frame.append(valdez_cordova)
+    for county in county_data_frame:
+        county["County Index"] = county["TPP County Name"] + (county["State code"].lower())
+    county_data_frame = pd.DataFrame(county_data_frame)
 # read preset file
 with open(preset_path) as json_data:
     json_raw_data = json.load(json_data)
@@ -83,7 +87,7 @@ for state in states:
             county_election_data = \
                 county_data_frame.loc[county_data_frame["County Index"] == county_index].to_dict(orient="records")[0]
         except Exception:
-            print(county_index+" errored. Contact the dev")
+            print(county_index+" errored. Either you don't have all counties or you should contact the dev")
             exit()
         total_sum = 0
         for party in ["Dem", "Rep", "Ind"]:
