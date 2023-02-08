@@ -7,4 +7,4 @@ There aren't very many limitations, but there are some;
 - Windows is necessary for this script, as that's what TPP uses and other operating systems probably won't work.
 
 ### Notes
-[All work is licensed under the MIT license.](https://github.com/DontTreadOnGerman/TPP-County-Automator/blob/main/LICENSE). You can view my other work, including my electoral models and maps, at [my website, acctuallydavid.com.](https://acctuallydavid.com)
+[All work is licensed under the MIT license.](https://github.com/DontTreadOnGerman/TPP-County-Automator/blob/main/LICENSE). You can view my other work, including my electoral models and maps, at [my website, acctuallydavid.com.](https://acctuallydavid.com) My twitter can be found at @davidsacc12345, and I'd appreciate if you followed my account.
