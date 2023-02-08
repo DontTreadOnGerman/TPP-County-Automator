@@ -30,7 +30,6 @@ print("What do you want to name your newly generated preset? (add .json to the e
 preset_name = input()
 print(f"Where do you want your newly generated preset to go?\n"
       f"Don't add the preset file name to your input.\n"
-      f"When you're typing in a path, use / instead of {slash}\n"
       f"Type 'N/A' if you want it automatically sent to your TPP preset folder")
 preset_send_path = input()
 if preset_send_path == "N/A":
