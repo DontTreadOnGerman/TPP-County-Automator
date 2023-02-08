@@ -1,5 +1,5 @@
 # TPP-County-Automator
-Automates the creation of county presets/county advanced options in The Political Process. Simply paste your county data into the attached CSV and run the script.
+Automates the creation of county presets/county advanced options in The Political Process. Simply paste your county data into the attached CSV and run the script. You can even use your pre-existing advanced options if you've already got some great ones set up!
 
 ### Limitations
 There aren't very many limitations, but there are some;
