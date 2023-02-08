@@ -1,8 +1,6 @@
 import pandas as pd
-import numpy as np
 import json
 import os
-import decimal
 
 tpp_folder = str(os.getenv('APPDATA')).replace("Roaming",
                                                "Local") + r"\the_political_process\User Data\Default\saveFiles\advancedOptions"
@@ -29,6 +27,12 @@ preset_datafile = input()
 # read preset file
 with open(preset_path) as json_data:
     json_raw_data = json.load(json_data)
+# get county skeleton
+county_skeletons = {}
+county_data_frame = pd.read_csv("base_county_csv.csv").to_dict(orient="records")
+for county in county_data_frame:
+    county_index = county["TPP County Name"] + (county["State code"].lower())
+    county_skeletons[county_index] = county
 # parse preset file
 counties = []
 for state in states:
@@ -37,14 +41,21 @@ for state in states:
     for county in state_data:
         # demPop repPop indPop
         county_index = county["name"] + (state.lower())
+        county_data = county_skeletons[county_index]
         print(county["name"] + ", " + state + " added to CSV datafile")
-        counties.append({"TPP County Name": county["name"],
-                         "State": state, "Dem %":
-                             county[f"demPop"], "GOP %":
-                             county[f"repPop"], "Indy %":
-                             county[f"indPop"]})
+        for party in ["Dem", "Rep", "Ind"]:
+            county_data[f"{party.replace('Rep', 'GOP').replace('Ind', 'Indy')} %"] = county[f"{party.lower()}Pop"]
+        counties.append(county_data)
 # finished
 county_data = pd.DataFrame(counties)
-county_data = county_data.set_index("TPP County Name")
+cordova_data = county_data.loc[county_data["TPP County Name"] == "Valdez Cordova Borough"].to_dict(orient="records")[0]
+boroughs = {2062: "Chugach", 2064: "Copper River"}
+c_dataset = cordova_data.copy()
+c_dataset["County Name"] = "Chugach"
+c_dataset["FIPS"] = 2062
+counties.append(c_dataset)
+county_data = pd.DataFrame(counties)
+county_data = county_data.set_index("FIPS")
+county_data = county_data.sort_values(by=['State code', 'FIPS'], ascending=[True, True])
 county_data.to_csv(preset_datafile)
 print(f"County data saved to {preset_datafile}")
