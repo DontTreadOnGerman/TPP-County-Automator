@@ -8,4 +8,6 @@ There aren't very many limitations, but there are some;
 - The county script replaces state leans in your advanced options, since that's how the game was designed
 
 ### Notes
-[All work is licensed under the MIT license.](https://github.com/DontTreadOnGerman/TPP-County-Automator/blob/main/LICENSE). You can view my other work, including my electoral models and maps, at [my website, acctuallydavid.com.](https://acctuallydavid.com) My twitter can be found at @davidsacc12345, and I'd appreciate if you followed my account.
+- The preset used in the 2022 with flavor under examples was created by OregonMapGuy at [github.com/OregonMapGuy/2004Partisanship.](https://github.com/OregonMapGuy/2004Partisanship) All credit for that preset belongs to him - I simply overlayed it with 2022 county data.
+- [All work is licensed under the MIT license.](https://github.com/DontTreadOnGerman/TPP-County-Automator/blob/main/LICENSE)
+- You can view my other work, including my electoral models and maps, at [my website, acctuallydavid.com.](https://acctuallydavid.com) My twitter can be found at @davidsacc12345, and I'd appreciate if you followed my account.
