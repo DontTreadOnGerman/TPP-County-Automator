@@ -5,6 +5,7 @@ Automates the creation of county presets/county advanced options in The Politica
 There aren't very many limitations, but there are some;
 - It's recommended to round your county data to the nearest thousandth place, since exact division in any coding language is impossible (if you're confused, go to this [StackOverflow page.](https://stackoverflow.com/questions/588004/is-floating-point-math-broken))
 - Windows is necessary for this script, as that's what TPP uses and other operating systems probably won't work.
+- The county script replaces state leans in your advanced options, since that's how the game was designed
 
 ### Notes
 [All work is licensed under the MIT license.](https://github.com/DontTreadOnGerman/TPP-County-Automator/blob/main/LICENSE). You can view my other work, including my electoral models and maps, at [my website, acctuallydavid.com.](https://acctuallydavid.com) My twitter can be found at @davidsacc12345, and I'd appreciate if you followed my account.
